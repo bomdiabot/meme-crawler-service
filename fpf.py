@@ -1,17 +1,9 @@
 import urllib3
 from bs4 import BeautifulSoup
-import json
-import requests
 
-api_url = 'http://35.226.124.10:7310'
+urllib3.disable_warnings()
 
-def login(user, password):
-    payload = {'username': user, 'password': password}
-    r = requests.post(api_url + '/auth/login', data=payload)
-    access_token = r.json()['access_token']
-    return access_token
-
-def get_texts(page):    
+def get_page_texts(page):    
     http = urllib3.PoolManager()
     page_url = 'https://www.frasesparaface.com.br/frases-bom-dia/{}/'.format(page)
     response = http.request('GET', page_url)
@@ -22,3 +14,9 @@ def get_texts(page):
     for bom_dia in title:
         collection.append(bom_dia.text.strip())
     return collection
+def get_all_texts():
+    collection = []
+    for i in range(24):
+        page_content = get_page_texts(i+1)
+        print(page_content)
+        collection.append(page_content)
