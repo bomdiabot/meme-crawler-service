@@ -5,11 +5,11 @@ urllib3.disable_warnings()
 
 def get_page_texts(page):    
     http = urllib3.PoolManager()
-    page_url = 'https://www.belasmensagens.com.br/bom-dia/page/{}/'.format(page)
+    page_url = 'https://www.lindasmensagens.com.br/bom-dia/{}/'.format(page)
     response = http.request('GET', page_url)
     soup = BeautifulSoup(response.data, 'html.parser')
 
-    title = soup.find_all('div', attrs={'class': 'grid-item'})
+    title = soup.find_all('div', attrs={'class': 'post-item'})
     collection = []
     for grid in title:
         bom_dia = grid.find('p')
@@ -18,7 +18,7 @@ def get_page_texts(page):
     return collection
 def get_all_texts():
     collection = []
-    for i in range(4):
+    for i in range(9):
         page_content = get_page_texts(i+1)
         print(page_content)
         collection.append(page_content)
