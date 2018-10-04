@@ -15,11 +15,10 @@ def main():
         
     for item in unwrapped_content:
         source = UnwrappedSource(item['url'], item['element'], item['class'])
-        source.get_all_texts(item['pages'])
         texts = source.get_all_texts(item['pages'])
         for page in texts:
             for text in page:
-                cli.post_text(text, item['name'])
+                cli.post_text(text, item['name'], item['kind'])
 
 if __name__ == "__main__":
     main()

@@ -22,10 +22,10 @@ class Client(object):
         }
         return requests.post(self.api_url + route, headers=headers, data=payload)
 
-    def post_text(self, text, src):
+    def post_text(self, text, src, kind):
         payload = {}
         payload['content'] = text
-        payload['tags'] = 'bomdia,src:{}'.format(src)
+        payload['tags'] = '{},src:{}'.format(kind, src)
         data = json.dumps(payload)
         r = self.post('texts', data)
         print(r.json())
