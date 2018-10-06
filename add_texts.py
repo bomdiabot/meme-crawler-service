@@ -25,6 +25,7 @@ def main():
 
     texts = source.get_all_texts(int(pages))
     print(texts)
+    print('name: {}, tag: {}'.format(page_name, tag))
     proceed = input('Proceed? (y/n) ')
     if proceed == 'y':
         confirmation = input('Are you sure? (y/n) ')
